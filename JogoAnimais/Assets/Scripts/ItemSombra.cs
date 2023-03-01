@@ -8,7 +8,9 @@ using UnityEngine.UI;
 public class ItemSombra : MonoBehaviour, IDropHandler
 {
     public string nomeDaCena;
-    public Button botao; 
+    public Button botaoCena;
+    public Button botaoNome;
+    public Button botaoSom;
 
 void start()
 {
@@ -27,7 +29,9 @@ void start()
 
                 DragDrop.colouCerto = true;
                 
-                botao.gameObject.SetActive(true);
+                botaoCena.gameObject.SetActive(true);
+                botaoNome.gameObject.SetActive(true);
+                botaoSom.gameObject.SetActive(true);
                                                      
             }
         }

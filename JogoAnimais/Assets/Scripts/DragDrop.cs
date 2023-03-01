@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class DragDrop : MonoBehaviour, IBeginDragHandler, IPointerDownHandler, IEndDragHandler, IDragHandler
 {
@@ -11,6 +13,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IPointerDownHandler, I
    private Vector2 posicaoOriginal;
 
    public static bool colouCerto;
+   private AudioSource somAudio;
    
    
    private void Awake() 
@@ -19,6 +22,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IPointerDownHandler, I
         grupo = GetComponent<CanvasGroup>();
         posicaoOriginal = rt.anchoredPosition;
         colouCerto = false;
+        somAudio= GetComponent<AudioSource>();
    }
    
    public void OnBeginDrag(PointerEventData eventData)
@@ -26,18 +30,25 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IPointerDownHandler, I
     Debug.Log("Funfou o primeiro click");
     grupo.alpha = 0.3f;
     grupo.blocksRaycasts = false;
+        //GetComponent<AudioSource>().Play();
+
+        //OnMouseClick();
+    
    }
 
-   public void OnDrag(PointerEventData eventData)
+    public void OnDrag(PointerEventData eventData)
    {
     rt.anchoredPosition += eventData.delta;
     Debug.Log("Dragou");
+        OnMouseDrag();
+
    }
 
    public void OnPointerDown(PointerEventData eventData)
    {
     Debug.Log("Clicou");
-   }
+        somAudio.Play();
+    }
    
    public void OnEndDrag(PointerEventData eventData)
    {
@@ -45,10 +56,36 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IPointerDownHandler, I
     grupo.alpha = 1f;
     grupo.blocksRaycasts = true;
 
-    if(colouCerto == false)
+        if (colouCerto == false)
     {
         rt.anchoredPosition = posicaoOriginal;
     }
     colouCerto = false;
+
+        OnMouseDown();  
+
+
    }
+
+    //-----------//
+    private void OnMouseClick()
+    {
+        CursorController.instance.ActiveCursorClick();
+    }
+
+    private void OnMouseDrag()
+    {
+        CursorController.instance.ActiveCursorDrag();
+    }
+
+    private void OnMouseDown()
+    {
+        CursorController.instance.ActiveCursor();
+    }
+
+    private void OnMouseEnter()
+    {
+        CursorController.instance.ActiveCursor();
+    }
+
 }
