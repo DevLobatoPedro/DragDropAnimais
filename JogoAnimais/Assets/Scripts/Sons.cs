@@ -6,18 +6,12 @@ using UnityEngine;
 /*public class Sons : MonoBehaviour
 {
 
-    private static AudioSource m_AudioSource;
-    public string sonsAnimais = "Assets/Resources/Audio/Sons";
-
-
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        m_AudioSource = gameObject.AddComponent<AudioSource>();
-    }
-
-   public static void tocarSom(string tag)
-    {
-        m_AudioSource.clip = Resources.Load<AudioClip>(sonsAnimais + tag);
+        if (other.tag == gameObject.tag)
+        {
+            GetComponent<AudioSource>().Play();
+        }
     }
 }*/
 

@@ -11,6 +11,7 @@ public class ItemSombra : MonoBehaviour, IDropHandler
     public Button botaoCena;
     public Button botaoNome;
     public Button botaoSom;
+    
 
 void start()
 {
@@ -32,6 +33,8 @@ void start()
                 botaoCena.gameObject.SetActive(true);
                 botaoNome.gameObject.SetActive(true);
                 botaoSom.gameObject.SetActive(true);
+                GetComponent<AudioSource>().enabled = true;
+                
                                                      
             }
         }
